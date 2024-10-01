@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, FormGroup, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
@@ -129,6 +129,7 @@ function App() {
             label={useStateRequired ? 'Remove useState' : 'Add useState'}
             control={
               <Checkbox
+                id='useState'
                 checked={useStateRequired}
                 onChange={(e) => setUseStateRequired(e.target.checked)}
               />
@@ -138,6 +139,7 @@ function App() {
             label={useEffectRequired ? 'Remove useEffect' : 'Add useEffect'}
             control={
               <Checkbox
+                id='useEffect'
                 checked={useEffectRequired}
                 onChange={(e) => setUseEffectRequired(e.target.checked)}
               />
@@ -146,8 +148,10 @@ function App() {
         </FormGroup>
 
         <FormControl variant="outlined" fullWidth>
-          <InputLabel>API Call Type</InputLabel>
+          <InputLabel htmlFor="type">API Call Type</InputLabel>
           <Select
+            id='type'
+            name='type'
             value={apiCallType}
             onChange={(e) => setApiCallType(e.target.value)}
             label="API Call Type"
@@ -162,6 +166,8 @@ function App() {
         {apiCallType && (
           <TextField
             label="API URL"
+            name='url'
+            id='url'
             value={apiUrl}
             onChange={(e) => setApiUrl(e.target.value)}
             variant="outlined"
@@ -169,10 +175,11 @@ function App() {
           />
         )}
         <Box sx={{ display: 'flex' }}>
-          <Button sx={{ backgroundColor: '#1a1a1a' }} variant="contained" onClick={generatePseudocode}>
+          <Button disableRipple sx={{ backgroundColor: '#1a1a1a' }} variant="contained" onClick={generatePseudocode}>
             Generate Pseudocode
           </Button>
           <Button
+            disableRipple
             sx={{ marginLeft: '10px', backgroundColor: 'red' }}
             variant="contained"
             onClick={() => {
@@ -188,20 +195,26 @@ function App() {
         </Box>
 
         {pseudocode && (
-          <Box sx={{ marginTop: 4, padding: '20px' }}>
+          <Box sx={{ marginTop: 4 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography variant="h6" component="h2">
                 Generated Pseudocode
               </Typography>
               {!copySuccess ? (
-                <ContentCopyIcon
-                  sx={{ cursor: 'pointer', fontSize: '18px' }}
+                <IconButton
+                  disableRipple
                   onClick={copyToClipboard}
-                />
+                >
+                  <ContentCopyIcon
+                    sx={{ cursor: 'pointer', fontSize: '18px' }}
+                  />
+                </IconButton>
               ) : (
-                <LibraryAddCheckIcon
-                  sx={{ cursor: 'pointer', fontSize: '18px' }}
-                />
+                <IconButton>
+                  <LibraryAddCheckIcon
+                    sx={{ cursor: 'pointer', fontSize: '18px' }}
+                  />
+                </IconButton>
               )}
             </Box>
             <pre>
