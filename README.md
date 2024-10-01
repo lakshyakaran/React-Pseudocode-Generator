@@ -21,7 +21,7 @@ Node.js and npm should be installed on your system.
 
 1. Clone the repository:
   ```bash
-  git clone https://github.com/lakshyakaran/react-pseudocode-generator.git
+  git clone https://github.com/lakshyakaran/React-Pseudocode-Generator.git
   ```
 2. Navigate into the project directory:
   ```bash
@@ -33,7 +33,7 @@ Node.js and npm should be installed on your system.
  ```
 4. Run the project locally:
   ```bash
-   npm start
+   npm run dev
  ```
 
 This will start the development server and open the application in your default browser.
